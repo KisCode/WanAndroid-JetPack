@@ -3,17 +3,23 @@ package com.kiscode.wanandroid.ui.home;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
+
+import com.kiscode.wanandroid.model.ArticleModel;
+import com.kiscode.wanandroid.model.datasourece.ArticleDataSourceFactory;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private LiveData<PagedList<ArticleModel>> pagedListLiveData;
+    private ArticleDataSourceFactory factory;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        factory =new ArticleDataSourceFactory();
+        pagedListLiveData = new LivePagedListBuilder<>(factory, 20).build();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<PagedList<ArticleModel>> getPagedListLiveData() {
+        return pagedListLiveData;
     }
 }

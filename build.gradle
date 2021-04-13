@@ -10,6 +10,40 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 28
+        minSdkVersion = 19
+        targetSdkVersion = 29
+        buildToolsVersion= "29.0.2"
+
+        //dependencies
+        appcompatVersion = '1.2.0'
+        constraintlayoutVersion = '2.0.4'
+        navigationVersion = '2.2.2'
+        roomVersion = '2.2.6'
+        workVersion = '2.3.4'
+        lifecycleVersion = '2.2.0'
+        lifecycleViewmodelSavedstateVersion = '2.3.0-alpha04'
+        legacySupportV4Version = '1.0.0'
+        paging_version = "2.1.0"
+
+        junitVersion = '4.13.2'
+        testExtJunitVersion = '1.1.2'
+        espressoVersion = '3.3.0'
+
+        materialVersion = "1.2.1"
+        swiperefreshlayoutVersion = "1.1.0"
+        recyclerviewVersion = "1.1.0"
+
+        rxjavaVersion = "2.1.0"
+        glideVersion = '4.9.0'
+        gsonVersion = '2.8.6'
+        debugDBVersion = '1.0.0'
+
+
+    }
 }
 
 allprojects {

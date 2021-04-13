@@ -1,10 +1,11 @@
 package com.kiscode.wanandroid.model.api;
 
 
+import com.kiscode.wanandroid.model.ArticleModel;
 import com.kiscode.wanandroid.model.ListModel;
 import com.kiscode.wanandroid.model.RetrunModel;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -24,5 +25,5 @@ public interface ApiService {
      * @return
      */
     @GET("/article/list/{pageIndex}/json")
-    Call<RetrunModel<ListModel<String>>> getArticleList(@Path("pageIndex") int pageIndex);
+    Observable<RetrunModel<ListModel<ArticleModel>>> getArticleList(@Path("pageIndex") int pageIndex);
 }

@@ -39,6 +39,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+
+    //分页库 paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
     // Retrofit   https://www.jianshu.com/p/8066ae4fb1b2
     implementation "com.squareup.retrofit2:retrofit:2.3.0"
     implementation "com.squareup.retrofit2:converter-gson:2.3.0"
