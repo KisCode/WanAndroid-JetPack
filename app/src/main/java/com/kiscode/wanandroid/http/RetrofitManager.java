@@ -1,6 +1,7 @@
 package com.kiscode.wanandroid.http;
 
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,7 +19,15 @@ public class RetrofitManager {
             .baseUrl(BASEURL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(createHttpClient())
             .build();
+
+    private static OkHttpClient createHttpClient() {
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+//                .addInterceptor(null)
+                .build();
+        return httpClient;
+    }
 
     public static Retrofit getInstance() {
         return retrofit;

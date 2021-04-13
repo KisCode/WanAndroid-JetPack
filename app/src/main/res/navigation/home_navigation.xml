@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_wechat"
-        android:name="com.kiscode.wanandroid.ui.wechat.NotificationsFragment"
+        android:name="com.kiscode.wanandroid.ui.wechat.WeChatFragment"
         android:label="@string/title_wechat"
         tools:layout="@layout/fragment_notifications" />
 

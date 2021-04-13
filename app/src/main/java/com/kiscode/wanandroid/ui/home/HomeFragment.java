@@ -1,6 +1,7 @@
 package com.kiscode.wanandroid.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.kiscode.wanandroid.R;
 import com.kiscode.wanandroid.model.ArticleModel;
 
 public class HomeFragment extends Fragment {
+
+    private static final String TAG = "HomeFragment";
 
     private HomeViewModel homeViewModel;
     private ArticleListAdapter adapter;
@@ -42,6 +45,24 @@ public class HomeFragment extends Fragment {
                 adapter.submitList(articleModels);
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG,"onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i(TAG,"onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG,"onDestroy");
     }
 
     private void initViews(View root) {
