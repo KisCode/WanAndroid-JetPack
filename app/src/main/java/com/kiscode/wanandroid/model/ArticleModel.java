@@ -348,7 +348,7 @@ public class ArticleModel implements Serializable {
         this.zan = zan;
     }
 
-    public static class TagsBean {
+    public static class TagsBean implements Serializable {
         /**
          * name : 本站发布
          * url : /article/list/0?cid=440
@@ -356,5 +356,21 @@ public class ArticleModel implements Serializable {
 
         private String name;
         private String url;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 }

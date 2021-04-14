@@ -50,19 +50,19 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        Log.i(TAG,"onStop");
+        Log.i(TAG, "onStop");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.i(TAG,"onDestroyView");
+        Log.i(TAG, "onDestroyView");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG,"onDestroy");
+        Log.i(TAG, "onDestroy");
     }
 
     private void initViews(View root) {
@@ -71,5 +71,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        adapter.setOnItemClickListener(pos -> ArticleWebviewActivity.start(getActivity(), adapter.getCurrentList().get(pos)));
     }
 }

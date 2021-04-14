@@ -49,6 +49,11 @@ public class ArticleListAdapter extends PagedListAdapter<ArticleModel, ArticleLi
             return;
         }
         holder.tvTitle.setText(item.getTitle());
+        holder.itemView.setOnClickListener(v -> {
+            if(onItemClickListener!=null){
+                onItemClickListener.onItemClick(position);
+            }
+        });
     }
 
     static class ArticleViewHolder extends RecyclerView.ViewHolder {
@@ -59,5 +64,15 @@ public class ArticleListAdapter extends PagedListAdapter<ArticleModel, ArticleLi
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
         }
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int pos);
     }
 } 
