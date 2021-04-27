@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.home.ArticleWebviewActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/style_toolbar"
+        android:theme="@style/AppTheme.PopupOverlay"
+        />
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/pabr_article"
         style="@android:style/Widget.ProgressBar.Horizontal"

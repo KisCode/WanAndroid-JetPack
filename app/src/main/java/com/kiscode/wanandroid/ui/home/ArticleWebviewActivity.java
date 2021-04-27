@@ -1,20 +1,24 @@
 package com.kiscode.wanandroid.ui.home;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ContentLoadingProgressBar;
-
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 
 import com.kiscode.wanandroid.R;
 import com.kiscode.wanandroid.model.ArticleModel;
@@ -22,8 +26,10 @@ import com.kiscode.wanandroid.model.ArticleModel;
 public class ArticleWebviewActivity extends AppCompatActivity {
 
     private static final String KEY_ARTICLE = "ARTICLE";
+    private boolean isFavorite;
     private WebView webView;
     private ContentLoadingProgressBar pbar;
+    private Toolbar toolbar;
     private ArticleModel articleModel;
 
     public static void start(Context context, ArticleModel articleModel) {
@@ -36,17 +42,9 @@ public class ArticleWebviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_webview);
-
         initView();
-
-        articleModel = (ArticleModel) getIntent().getSerializableExtra(KEY_ARTICLE);
-
+        initData();
         initWebView();
-    }
-
-    private void initView() {
-        pbar = findViewById(R.id.pabr_article);
-        webView = findViewById(R.id.webview_article);
     }
 
     @Override
@@ -54,6 +52,49 @@ public class ArticleWebviewActivity extends AppCompatActivity {
         super.onDestroy();
         webView.destroy();
         webView = null;
+    }
+
+    private void initData() {
+        articleModel = (ArticleModel) getIntent().getSerializableExtra(KEY_ARTICLE);
+
+        getSupportActionBar().setTitle(articleModel.getTitle());
+    }
+
+    private void initView() {
+        pbar = findViewById(R.id.pabr_article);
+        webView = findViewById(R.id.webview_article);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_favorite, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_favorite:
+                Log.i("onOptionsItemSelected", "action_favorite");
+                isFavorite = !isFavorite;
+                setMenuItemCheck(isFavorite, item);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setMenuItemCheck(boolean isCheck, MenuItem menuItem) {
+        menuItem.setChecked(isCheck);
+        MenuItemCompat.setIconTintList(
+                menuItem, ColorStateList.valueOf(isCheck ? ContextCompat.getColor(this, R.color.red) : ContextCompat.getColor(this, R.color.white)));
     }
 
     private void initWebView() {
@@ -112,7 +153,5 @@ public class ArticleWebviewActivity extends AppCompatActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-
-
     }
 }
